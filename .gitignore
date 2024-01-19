@@ -2,10 +2,9 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+artifacts
 # C extensions
 *.so
-*/artifacts/*
 # Distribution / packaging
 .Python
 build/
@@ -127,7 +126,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-
+artifacts/
 # Spyder project settings
 .spyderproject
 .spyproject
