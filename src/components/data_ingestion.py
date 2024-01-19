@@ -90,8 +90,8 @@ class DataIngestion:
             data_ingestion_artifacts = DataIngestionArtifact(
                 downloaded_data_filepath=downloaded_path,
                 extracted_data_filepath=extracted_data_path,
-                trained_data_filepath=train_data_filepath,
-                test_data_filepath=test_data_filepath,
+                training_data_filepath=train_data_filepath,
+                testing_data_filepath=test_data_filepath,
             )
             logging.info(f"Exiting Data Ingestion component's initate data ingestion method ")
             return data_ingestion_artifacts

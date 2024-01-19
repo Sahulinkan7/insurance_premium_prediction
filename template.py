@@ -19,6 +19,7 @@ list_of_files = [
     f"src/pipeline/prediction_pipeline.py",
     f"src/utils/__init__.py",
     f"src/utils/utils.py",
+    f"src/constants/__init__.py",
     f"src/logger.py",
     f"src/exception.py",
     f"requirements.txt",

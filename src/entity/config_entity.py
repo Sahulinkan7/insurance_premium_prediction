@@ -1,13 +1,11 @@
 from dataclasses import dataclass
 import os, sys
-from datetime import datetime
-
-current_time_stamp = f"{datetime.now().strftime('%d_%m_%y_%H_%M_%S')}"
+from src.constants import CURRENT_TIME_STAMP
 
 
 @dataclass
 class TrainingPipelineConfig:
-    training_artifact_dirpath: str = os.path.join("artifacts", f"{current_time_stamp}")
+    training_artifact_dirpath: str = os.path.join("artifacts", f"{CURRENT_TIME_STAMP}")
 
 
 @dataclass
@@ -27,6 +25,7 @@ class DataValidationConfig:
     root_dir = os.path.join(
         TrainingPipelineConfig.training_artifact_dirpath, "data_validation"
     )
+    validation_status_filepath=os.path.join(root_dir,"validation_status","validation_status.yaml")
 
 
 @dataclass
