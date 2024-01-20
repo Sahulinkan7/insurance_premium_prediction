@@ -31,9 +31,11 @@ class DataValidationConfig:
 @dataclass
 class DataTransformationConfig:
     root_dir = os.path.join(
-        TrainingPipelineConfig.training_artifact_dirpath, "data_transforamtion"
+        TrainingPipelineConfig.training_artifact_dirpath, "data_transformation"
     )
-
+    transformed_train_arr_filepath = os.path.join(root_dir,"transformed_data","train.npy")
+    transformed_test_arr_filepath = os.path.join(root_dir,"transformed_data","test.npy")
+    transformed_preprocessor_filepath = os.path.join(root_dir,"transformed_preprocessor","preprocessor.pkl")
 
 @dataclass
 class ModelTrainerConfig:

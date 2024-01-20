@@ -1,5 +1,5 @@
 from src.components.data_ingestion import DataIngestion
-from src.entity.artifact_entity import DataIngestionArtifact,DataValidationArtifact
+from src.entity.artifact_entity import DataIngestionArtifact,DataValidationArtifact,DataTransformationArtifact
 from src.components.data_validation import DataValidation
 from src.entity.config_entity import (
     TrainingPipelineConfig,
@@ -8,7 +8,7 @@ from src.entity.config_entity import (
     DataTransformationConfig,
     ModelTrainerConfig,
 )
-
+from src.components.data_transformation import DataTransformation
 import os, sys
 from src.logger import logging
 from src.exception import CustomException
@@ -49,18 +49,25 @@ class TrainingPipeline:
             logging.info(f"{'+'*20} Data Validation completed {'+'*20}")
             return data_validation_artifacts
         except Exception as e:
-            logging.info(f"Training pipeline start data validation interrupted due to {CustomException(e,sys)}")
+            logging.error(f"Training pipeline start data validation interrupted due to {CustomException(e,sys)}")
             raise CustomException(e,sys)
 
     def start_data_transformation(
         self,
         data_transformation_config: DataTransformationConfig,
-        data_validation_artifact,
-    ):
+        data_validation_artifact: DataValidationArtifact,
+    )-> DataTransformationArtifact:
         try:
-            pass
+            logging.info(f"{'*'*20} Data Transformation component started {'*'*20}")
+            dt = DataTransformation(data_transformation_config = data_transformation_config,
+                                    data_validation_artifact = data_validation_artifact)
+            data_transformation_artifacts = dt.initiate_data_transformation()
+            logging.info(f"data transformation artifacts : {data_transformation_artifacts}")
+            logging.info(f"{'*'*20} Data Transformation component completed {'*'*20}")
+            return data_transformation_artifacts
         except Exception as e:
-            raise e
+            logging.error(f"Training pipeline start data transformation interrupted due to {CustomException(e,sys)}")
+            raise CustomException(e,sys)
 
     def start_model_training(self, model_trainer_config, data_transformation_artifact):
         try:
@@ -77,6 +84,8 @@ class TrainingPipeline:
                 data_validation_config=self.data_validation_config,
                 data_ingestion_artifacts=data_ingestion_artifacts
             )
+            data_transformation_artifacts = self.start_data_transformation(data_transformation_config=self.data_transformation_config,
+                                           data_validation_artifact=data_validation_artifacts)
             TrainingPipeline.is_pipeline_running=True
             logging.info(f"{'*'*30} Model training completed {'*'*30}")
         except Exception as e:

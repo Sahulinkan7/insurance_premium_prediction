@@ -3,6 +3,8 @@ from src.logger import logging
 import pandas as pd
 import os, sys
 import yaml
+import pickle
+import numpy as np
 
 def read_dataframe(file_path: str) -> pd.DataFrame:
     try:
@@ -36,5 +38,26 @@ def write_yaml_file(file_path : str ,content: dict):
             yaml.dump(content,file)
     except Exception as e:
         logging.error(f"writing yaml file interrupted due to {CustomException(e,sys)}")
+        raise CustomException(e,sys)
+    
+def save_object(file_path,obj):
+    try:
+        logging.info(f"saving object in file path : {file_path}")
+        os.makedirs(os.path.dirname(file_path),exist_ok=True)
+        with open(file_path,"wb") as file:
+            pickle.dump(obj=obj,file=file)
+            
+    except Exception as e:
+        logging.error(f"saving object interrupted due to {CustomException(e,sys)}")
+        raise CustomException(e,sys)
+    
+def save_numpy_array_data(file_path,array):
+    try:
+        logging.info(f"saving numpy array data in {file_path}")
+        os.makedirs(os.path.dirname(file_path),exist_ok=True)
+        with open(file_path,"wb") as file:
+            np.save(file=file,arr=array)
+    except Exception as e:
+        logging.error(f"saving numpy array data interrupted due to {CustomException(e,sys)}")
         raise CustomException(e,sys)
     
