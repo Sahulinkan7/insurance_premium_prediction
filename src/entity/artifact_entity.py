@@ -20,3 +20,9 @@ class DataTransformationArtifact:
     transformed_train_arr_filepath : str
     transformed_test_arr_filepath : str
     
+@dataclass
+class ModelTrainerArtifact:
+    trained_model_filepath : str
+    model_accepted : bool
+    model_accuracy : float
+    

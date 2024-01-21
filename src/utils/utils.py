@@ -51,6 +51,15 @@ def save_object(file_path,obj):
         logging.error(f"saving object interrupted due to {CustomException(e,sys)}")
         raise CustomException(e,sys)
     
+def load_object(file_path):
+    try:
+        logging.info(f"loading object from file path : {file_path}")
+        with open(file_path,"rb") as fileobj:
+            return pickle.load(file=fileobj)
+    except Exception as e:
+        logging.error(f"loading object interrupted due to {CustomException(e,sys)}")
+        raise CustomException(e,sys)
+    
 def save_numpy_array_data(file_path,array):
     try:
         logging.info(f"saving numpy array data in {file_path}")
@@ -59,5 +68,15 @@ def save_numpy_array_data(file_path,array):
             np.save(file=file,arr=array)
     except Exception as e:
         logging.error(f"saving numpy array data interrupted due to {CustomException(e,sys)}")
+        raise CustomException(e,sys)
+    
+    
+def load_numpy_array_data(file_path):
+    try:
+        logging.info(f"loading numpy array data from {file_path}")
+        with open(file_path,"rb") as file:
+            return np.load(file=file)
+    except Exception as e:
+        logging.error(f"loading numpy array data interrupted due to {CustomException(e,sys)}")
         raise CustomException(e,sys)
     

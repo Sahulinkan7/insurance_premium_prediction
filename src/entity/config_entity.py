@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 import os, sys
-from src.constants import CURRENT_TIME_STAMP
+from src.constants import CURRENT_TIME_STAMP,MODEL_TRAINER_CONFIG_FILEPATH
 
 
 @dataclass
@@ -42,3 +42,5 @@ class ModelTrainerConfig:
     root_dir = os.path.join(
         TrainingPipelineConfig.training_artifact_dirpath, "model_trainer"
     )
+    model_trainer_config_filepath = MODEL_TRAINER_CONFIG_FILEPATH
+    trained_model_file_path = os.path.join(root_dir,"trained_model","model.pkl")
