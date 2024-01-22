@@ -4,4 +4,6 @@ seaborn
 scikit-learn
 django
 pyYAML
+dvc
+dvc[s3]
 -e .

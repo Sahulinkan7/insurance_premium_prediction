@@ -1,0 +1,5 @@
+stages:
+  training:
+    cmd: python main.py
+    deps:
+      - main.py

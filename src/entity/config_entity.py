@@ -5,7 +5,7 @@ from src.constants import CURRENT_TIME_STAMP,MODEL_TRAINER_CONFIG_FILEPATH
 
 @dataclass
 class TrainingPipelineConfig:
-    training_artifact_dirpath: str = os.path.join("artifacts", f"{CURRENT_TIME_STAMP}")
+    training_artifact_dirpath: str = os.path.join("artifacts")
 
 
 @dataclass
